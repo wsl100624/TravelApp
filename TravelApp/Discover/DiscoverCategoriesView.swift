@@ -27,7 +27,8 @@ struct DiscoverCategoriesView: View {
                 ForEach(items, id: \.self) { item in
                     
                     NavigationLink(
-                        destination: CategoryDetailsView(name: item.name),
+                        destination:
+                            NavigationLazyView(CategoryDetailsView(name: item.name)),
                         label: {
                             VStack(spacing: 4) {
                                 Image(systemName: item.thumbnail)
