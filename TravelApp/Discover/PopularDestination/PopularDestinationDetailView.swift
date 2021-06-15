@@ -11,12 +11,18 @@ import MapKit
 struct PopularDestinationDetailView: View {
     
     var item: Destination
+    var attractions: [Attraction] = [
+        .init(name: "Eiffel Tower", lat: 48.859565, long: 2.2946),
+        .init(name: "Champs-Elysees", lat: 48.859565, long: 2.311780),
+        .init(name: "Louvre Museum", lat: 48.859565, long: 2.337789)
+    ]
     
     @State var region: MKCoordinateRegion
+    @State var isShowingAttractions = false
     
     init(item: Destination) {
         self.item = item
-        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: item.latitude, longitude: item.longitude), span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
+        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: item.latitude, longitude: item.longitude), span: .init(latitudeDelta: 0.07, longitudeDelta: 0.07)))
     }
     
     var body: some View {
@@ -46,24 +52,42 @@ struct PopularDestinationDetailView: View {
                 })
                 
                 Text("Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.")
-//                                    .lineLimit(7)
+                                    .lineLimit(3)
             }.padding(.horizontal)
             
             HStack {
                 Text("Location")
                     .font(.title2.bold())
                 Spacer()
+                
+                Button(action: {
+                    isShowingAttractions.toggle()
+                }, label: {
+                    Text("\(isShowingAttractions ? "Hide" : "Show") Attractions")
+                        .foregroundColor(.secondary)
+                        .font(.callout.bold())
+                })
+                
+                Toggle("TITLEToggle", isOn: $isShowingAttractions).labelsHidden()
             }
             .padding(.top)
             .padding(.horizontal)
-            
-            Map(coordinateRegion: $region)
-                .frame(height: 200)
-                .padding(.bottom, 40)
+//
+            Map(coordinateRegion: $region, annotationItems: isShowingAttractions ? attractions : []) { attraction in
+                MapMarker(coordinate: .init(latitude: attraction.lat, longitude: attraction.long), tint: Color(UIColor.systemBlue))
+            }
+            .frame(height: 300)
             
         }.ignoresSafeArea()
     }
 }
+
+struct Attraction: Identifiable {
+    let id = UUID().uuidString
+    let name: String
+    let lat, long: Double
+}
+
 
 struct PopularDestinationDetailView_Previews: PreviewProvider {
     static var previews: some View {
