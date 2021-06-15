@@ -11,9 +11,9 @@ struct DiscoverCategoriesView: View {
     
     var items = [
         Place(name: "Art", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Sport", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
+        Place(name: "Sports", thumbnail: discoverIcons.randomElement()!),
+        Place(name: "Food", thumbnail: discoverIcons.randomElement()!),
+        Place(name: "Hello", thumbnail: discoverIcons.randomElement()!),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
@@ -27,7 +27,7 @@ struct DiscoverCategoriesView: View {
                 ForEach(items, id: \.self) { item in
                     
                     NavigationLink(
-                        destination: CategoryDetailsView(),
+                        destination: CategoryDetailsView(name: item.name),
                         label: {
                             VStack(spacing: 4) {
                                 Image(systemName: item.thumbnail)

@@ -14,10 +14,24 @@ class CategoryDetail: ObservableObject {
     @Published var places = [Place]()
     @Published var errorMessage = ""
     
-    init() {
-        guard let url = URL(string: "https://travel.letsbuildthatapp.com/travel_discovery/category?name=art") else { return }
+    init(name: String) {
+        
+        let urlString = "https://travel.letsbuildthatapp.com/travel_discovery/category?name=\(name.lowercased())"
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        guard let url = URL(string: urlString) else {
+            self.isLoading = false
+            return
+        }
         
         URLSession.shared.dataTask(with: url) { data, respone, error in
+            
+            if let statusCode = (respone as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
+                self.isLoading = false
+                self.errorMessage = "Bad request: \(statusCode)"
+                return
+            }
+            
             guard let data = data else { return }
             
             do {

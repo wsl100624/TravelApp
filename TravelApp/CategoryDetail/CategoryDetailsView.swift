@@ -11,13 +11,31 @@ import Kingfisher
 
 struct CategoryDetailsView: View {
     
-    @ObservedObject var detail = CategoryDetail()
+    private let name: String
+    @ObservedObject private var detail: CategoryDetail
+    
+    init(name: String) {
+        self.name = name
+        self.detail = .init(name: name)
+    }
     
     var body: some View {
         ZStack {
             if !detail.isLoading {
                 ZStack {
-                    Text(detail.errorMessage)
+                    if !detail.errorMessage.isEmpty {
+                        VStack(spacing: 8) {
+                            Image(systemName: "xmark.octagon.fill")
+                                .font(.system(size: 50, weight: .semibold))
+                                .foregroundColor(Color(UIColor.systemRed))
+                            Text(detail.errorMessage)
+                                .foregroundColor(.secondary)
+                                .font(.callout.bold())
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(.horizontal, 64)
+                        
+                    }
                     ScrollView {
                         ForEach(detail.places, id: \.self) { place in
                             VStack(alignment: .leading, spacing: 0) {
@@ -43,7 +61,7 @@ struct CategoryDetailsView: View {
                 .background(Color.loadingBackground)
                 .cornerRadius(12)
             }
-        }.navigationBarTitle("Category", displayMode: .inline)
+        }.navigationBarTitle(name, displayMode: .inline)
     }
 }
 
@@ -51,7 +69,7 @@ struct CategoryDetailsView: View {
 struct CategoryDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryDetailsView()
+            CategoryDetailsView(name: "food")
         }
         
     }
