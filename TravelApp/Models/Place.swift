@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 // MARK: - Discover
 
@@ -13,8 +14,12 @@ struct Place: Decodable, Hashable {
     var name, thumbnail: String
 }
 
-struct Destinations: Hashable {
+struct Destination: Hashable {
     var name, country, imageName: String
+    
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
+
 }
 
 struct Creator: Hashable {
