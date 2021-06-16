@@ -12,13 +12,13 @@ struct PopularDestinationDetailView: View {
     
     var item: Destination
     var attractions: [Attraction] = [
-        .init(name: "Eiffel Tower", lat: 48.859565, long: 2.2946),
-        .init(name: "Champs-Elysees", lat: 48.859565, long: 2.311780),
-        .init(name: "Louvre Museum", lat: 48.859565, long: 2.337789)
+        .init(name: "Eiffel Tower", lat: 48.859565, long: 2.2946, imageName: "image0"),
+        .init(name: "Champs-Elysees", lat: 48.859565, long: 2.311780, imageName: "image3"),
+        .init(name: "Louvre Museum", lat: 48.859565, long: 2.337789, imageName: "image2")
     ]
     
     @State var region: MKCoordinateRegion
-    @State var isShowingAttractions = false
+    @State var isShowingAttractions = true
     
     init(item: Destination) {
         self.item = item
@@ -72,9 +72,12 @@ struct PopularDestinationDetailView: View {
             }
             .padding(.top)
             .padding(.horizontal)
-//
+            
             Map(coordinateRegion: $region, annotationItems: isShowingAttractions ? attractions : []) { attraction in
-                MapMarker(coordinate: .init(latitude: attraction.lat, longitude: attraction.long), tint: Color(UIColor.systemBlue))
+//                MapMarker(coordinate: .init(latitude: attraction.lat, longitude: attraction.long), tint: Color(UIColor.systemBlue))
+                MapAnnotation(coordinate: .init(latitude: attraction.lat, longitude: attraction.long)) {
+                    CustomMapAnnotation(attraction: attraction)
+                }
             }
             .frame(height: 300)
             
@@ -82,10 +85,13 @@ struct PopularDestinationDetailView: View {
     }
 }
 
+
+
 struct Attraction: Identifiable {
     let id = UUID().uuidString
     let name: String
     let lat, long: Double
+    let imageName: String
 }
 
 
