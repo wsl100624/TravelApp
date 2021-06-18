@@ -21,6 +21,12 @@ struct Destination: Hashable {
     var longitude: CLLocationDegrees
 }
 
+struct Restaurant: Hashable {
+    var name: String
+    var imageName: String
+//    var country, city: String
+}
+
 let popularDestinations = [
     Destination(name: "Paris", country: "France", imageNames: ["image0"], latitude: 48.864716, longitude: 2.349014),
     Destination(name: "New York", country: "USA", imageNames: ["image2", "creator1"], latitude: 45.141927012290104, longitude: -93.16137679266993),
@@ -32,6 +38,10 @@ let popularDestinations = [
     Destination(name: "Beijing", country: "China", imageNames: ["image8", "creator7"], latitude: 48.864716, longitude: 2.349014),
     Destination(name: "Beijing", country: "China", imageNames: ["image9", "creator8"], latitude: 48.864716, longitude: 2.349014),
     Destination(name: "Beijing", country: "China", imageNames: ["image0", "creator9"], latitude: 48.864716, longitude: 2.349014),
+]
+
+let popularRestaurant = [
+    Restaurant(name: "Japan's Finest Tapas", imageName: "creator9")
 ]
 
 struct Creator: Hashable {
