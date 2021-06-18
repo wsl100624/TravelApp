@@ -14,7 +14,7 @@ struct PopularDestinationTile: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            Image(item.imageName)
+            Image(item.imageNames.first!)
                 .resizable().scaledToFill()
                 .frame(width: 200, height: 200)
                 .cornerRadius(5)
@@ -38,6 +38,6 @@ struct PopularDestinationTile: View {
 
 struct PopularDestinationTile_Previews: PreviewProvider {
     static var previews: some View {
-        PopularDestinationTile(item: .init(name: "Name", country: "Country", imageName: "image3", latitude: 48.864716, longitude: 2.349014))
+        PopularDestinationTile(item: .init(name: "Name", country: "Country", imageNames: ["image0", "creator1"], latitude: 48.864716, longitude: 2.349014))
     }
 }

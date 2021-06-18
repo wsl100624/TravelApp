@@ -10,7 +10,9 @@ import MapKit
 
 struct PopularDestinationDetailView: View {
     
-    var item: Destination
+    @ObservedObject var detailViewModel: DestinationDetailViewModel
+    
+    var name: String
     var attractions: [Attraction] = [
         .init(name: "Eiffel Tower", lat: 48.859565, long: 2.2946, imageName: "image0"),
         .init(name: "Champs-Elysees", lat: 48.859565, long: 2.311780, imageName: "image3"),
@@ -20,39 +22,40 @@ struct PopularDestinationDetailView: View {
     @State var region: MKCoordinateRegion
     @State var isShowingAttractions = true
     
-    init(item: Destination) {
-        self.item = item
-        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: item.latitude, longitude: item.longitude), span: .init(latitudeDelta: 0.07, longitudeDelta: 0.07)))
+    init(name: String) {
+        self.name = name
+        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: 0.0, longitude: 0.0), span: .init(latitudeDelta: 0.07, longitudeDelta: 0.07)))
+        self.detailViewModel = .init(name: name)
     }
     
     var body: some View {
         ScrollView {
             
-            Image(item.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 250)
-                .clipped()
+            if let photos = detailViewModel.detail?.photos {
+                PopularDestinationHeader(photos: photos)
+                    .frame(height: 300)
+            }
             
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(item.name)
-                        .font(.largeTitle.bold())
-                    Text(item.country)
-                        .foregroundColor(.secondary)
-                        .font(.caption.bold())
-                }
+                Text(detailViewModel.detail?.name ?? "")
+                    .font(.largeTitle.bold())
+                Text(detailViewModel.detail?.country ?? "")
+                    .foregroundColor(.secondary)
+                    .font(.title3.bold())
                 
-                HStack(alignment: .top, spacing: 8, content: {
+                HStack {
                     ForEach(0 ..< 5) { item in
                         Image(systemName: "star.fill")
                             .foregroundColor(.orange)
                     }
-                })
+                }.padding(.top, 2)
                 
-                Text("Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.Unable to present. Please file a bug.")
-                                    .lineLimit(3)
+                HStack {
+                    Text(detailViewModel.detail?.description ?? "")
+                    Spacer()
+                }.padding(.top, 2)
+                
             }.padding(.horizontal)
             
             HStack {
@@ -81,23 +84,17 @@ struct PopularDestinationDetailView: View {
             }
             .frame(height: 300)
             
-        }.ignoresSafeArea()
+        }.navigationBarTitle(name, displayMode: .inline)
     }
-}
-
-
-
-struct Attraction: Identifiable {
-    let id = UUID().uuidString
-    let name: String
-    let lat, long: Double
-    let imageName: String
 }
 
 
 struct PopularDestinationDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularDestinationDetailView(item: .init(name: "Paris", country: "France", imageName: "image0", latitude: 48.864716, longitude: 2.349014))
+        NavigationView {
+            PopularDestinationDetailView(name: "paris")
+        }
+        
 //        DiscoverView()
 //        PopularDestinationsView()
     }

@@ -15,12 +15,24 @@ struct Place: Decodable, Hashable {
 }
 
 struct Destination: Hashable {
-    var name, country, imageName: String
-    
+    var name, country: String
+    var imageNames: [String]
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
-
 }
+
+let popularDestinations = [
+    Destination(name: "Paris", country: "France", imageNames: ["image0"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "New York", country: "USA", imageNames: ["image2", "creator1"], latitude: 45.141927012290104, longitude: -93.16137679266993),
+    Destination(name: "Tokyo", country: "USA", imageNames: ["image3", "creator2"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Beijing", country: "China", imageNames: ["image4", "creator3"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Circle Pines", country: "USA", imageNames: ["image5", "creator4"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Minneapolis", country: "USA", imageNames: ["image6", "creator5"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Shore View", country: "USA", imageNames: ["image7", "creator6"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Beijing", country: "China", imageNames: ["image8", "creator7"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Beijing", country: "China", imageNames: ["image9", "creator8"], latitude: 48.864716, longitude: 2.349014),
+    Destination(name: "Beijing", country: "China", imageNames: ["image0", "creator9"], latitude: 48.864716, longitude: 2.349014),
+]
 
 struct Creator: Hashable {
     var name, imageName: String
