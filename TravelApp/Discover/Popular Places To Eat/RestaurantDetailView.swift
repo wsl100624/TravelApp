@@ -37,30 +37,6 @@ struct RestaurantDetailView: View {
     }
 }
 
-struct RestaurantDetailInfoView: View {
-    
-    let detail: RestaurantDetail?
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Location & Description")
-                .font(.title3.bold())
-            Text("\(detail?.city ?? ""), \(detail?.country ?? "")")
-            
-            HStack {
-                ForEach(0..<5, id: \.self) { num in
-                    Image(systemName: "dollarsign.circle.fill")
-                        .foregroundColor(.orange)
-                }
-            }
-            
-            Text(detail?.description ?? "")
-                .padding(.top, 8)
-                .font(.callout)
-        }.padding()
-    }
-}
-
 
 
 struct RestaurantDetailView_Previews: PreviewProvider {
