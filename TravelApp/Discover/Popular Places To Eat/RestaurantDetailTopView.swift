@@ -38,9 +38,13 @@ struct RestaurantDetailTopView: View {
                 
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("See more photos")
-                        .multilineTextAlignment(.trailing)
+                Button(action: {}, label: {
+                    NavigationLink(
+                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        label: {
+                            Text("See more photos")
+                                .multilineTextAlignment(.trailing)
+                        })
                 })
                 .foregroundColor(.white)
                 .font(.body)
@@ -54,7 +58,7 @@ struct RestaurantDetailTopView: View {
 struct RestaurantDetailTopView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-//            RestaurantDetailView(restaurant: popularRestaurant.first!)
+            RestaurantDetailView()
         }
         
     }
