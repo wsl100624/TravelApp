@@ -32,16 +32,17 @@ class CategoryDetail: ObservableObject {
                 return
             }
             
-            guard let data = data else { return }
-            
-            do {
-                self.places = try JSONDecoder().decode([Place].self, from: data)
-            } catch {
-                print("Failed to decode category JSON: ", error)
-                self.errorMessage = error.localizedDescription
-            }
-            
             DispatchQueue.main.async {
+            
+                guard let data = data else { return }
+                
+                do {
+                    self.places = try JSONDecoder().decode([Place].self, from: data)
+                } catch {
+                    print("Failed to decode category JSON: ", error)
+                    self.errorMessage = error.localizedDescription
+                }
+                
                 self.isLoading = false
             }
             

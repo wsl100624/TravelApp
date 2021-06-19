@@ -15,6 +15,9 @@ struct RestaurantDetailInfoView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            
+            HStack { Spacer() }
+            
             Text("Location & Description")
                 .font(.title3.bold())
             Text("\(detail?.city ?? ""), \(detail?.country ?? "")")
@@ -25,18 +28,18 @@ struct RestaurantDetailInfoView: View {
                         .foregroundColor(.orange)
                 }
             }
-            
-            Text(detail?.description ?? "")
-                .padding(.top, 8)
-                .font(.callout)
-        }.padding()
+        }
+        .padding(.top)
+        .padding(.horizontal)
+        
+        Text(detail?.description ?? "")
+            .font(.caption)
+            .padding()
     }
 }
 
 struct RestaurantDetailInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            
-        }
+        RestaurantDetailView()
     }
 }

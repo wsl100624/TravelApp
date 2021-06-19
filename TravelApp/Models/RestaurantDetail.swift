@@ -12,6 +12,7 @@ struct RestaurantDetail: Decodable {
     let name, city, country, thumbnail: String
     let description: String
     let popularDishes: [Dish]
+    let reviews: [Review]
 }
 
 struct Dish: Decodable, Hashable {
@@ -19,16 +20,21 @@ struct Dish: Decodable, Hashable {
     let numPhotos: Int
 }
 
-struct Review {
-    let id: Int
-    let username, firstName, lastName, profileImage, text: String
-    let followers, following, rating: Int
-    let posts: [Post]
+struct Review: Decodable, Hashable {
+    let user: ReviewUser
+    let text: String
+    let rating: Int
+//    let posts: [Post]
 }
 
-struct Post {
+struct ReviewUser: Decodable, Hashable {
+    let id: Int
+    let username, firstName, lastName, profileImage: String
+}
+
+struct Post: Decodable, Hashable {
     let title, imageUrl, views: String
-    let hastags: [String]
+    let hashtags: [String]
 }
 
 class RestaurantDetailViewModel: ObservableObject {

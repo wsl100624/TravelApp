@@ -24,7 +24,7 @@ struct RestaurantDetailView: View {
                     .font(.title3.bold())
                 Spacer()
             }.padding(.horizontal)
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(vm.details?.popularDishes ?? [], id: \.self) { dish in
@@ -32,6 +32,11 @@ struct RestaurantDetailView: View {
                     }
                 }.padding(.horizontal)
             }
+            
+            if let reviews = vm.details?.reviews {
+                RestaurantDetailReviewListView(reviews: reviews)
+            }
+            
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
@@ -42,7 +47,7 @@ struct RestaurantDetailView: View {
 struct RestaurantDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-//            RestaurantDetailView(restaurant: popularRestaurant.last!)
+            RestaurantDetailView()
         }
         
     }
