@@ -40,7 +40,7 @@ struct RestaurantDetailTopView: View {
                 
                 Button(action: {}, label: {
                     NavigationLink(
-                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        destination: RestaurantPhotosView(),
                         label: {
                             Text("See more photos")
                                 .multilineTextAlignment(.trailing)

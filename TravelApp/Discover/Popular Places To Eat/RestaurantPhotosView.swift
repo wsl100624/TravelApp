@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import WebKit
 
 struct RestaurantPhotosView: View {
     
@@ -32,6 +33,7 @@ struct RestaurantPhotosView: View {
     
     @State var mode = "grid"
     @State var fullScreen = false
+    @State var selectedIndex = 0
     
     init() {
         UISegmentedControl.appearance().selectedSegmentTintColor = .systemBlue
@@ -50,7 +52,7 @@ struct RestaurantPhotosView: View {
                         ZStack(alignment: .topLeading) {
                             Color.black.ignoresSafeArea()
                             
-                            RestaurantPhotoModelView(photos: urls)
+                            RestaurantPhotoModelView(photos: urls, index: $selectedIndex)
                             
                             Button(action: {
                                 fullScreen.toggle()
@@ -82,6 +84,7 @@ struct RestaurantPhotosView: View {
                             
                             Button(action: {
                                 fullScreen.toggle()
+                                selectedIndex = self.urls.firstIndex(of: item) ?? 0
                             }, label: {
                                 KFImage(URL(string: item))
                                     .resizable()

@@ -13,9 +13,10 @@ import Kingfisher
 struct RestaurantPhotoModelView: UIViewControllerRepresentable {
     
     let photos: [String]
+    @Binding var index: Int
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let vc = RestaurantPhotoPageVC(photos: photos)
+        let vc = RestaurantPhotoPageVC(photos: photos, selectedIndex: index)
         return vc
     }
     
@@ -41,18 +42,19 @@ class RestaurantPhotoPageVC: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     var photos: [String]
+    var selectedIndex: Int
     
-    init(photos: [String]) {
+    init(photos: [String], selectedIndex: Int) {
         self.photos = photos
+        self.selectedIndex = selectedIndex
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
         
         UIPageControl.appearance().currentPageIndicatorTintColor = .red
         UIPageControl.appearance().pageIndicatorTintColor = .systemGray5
         
-        if let firstVC = allVC.first {
-            setViewControllers([firstVC], direction: .forward, animated: true)
+        if selectedIndex < allVC.count  {
+            setViewControllers([allVC[selectedIndex]], direction: .forward, animated: true)
         }
-        
         dataSource = self
         delegate = self
     }
@@ -63,7 +65,7 @@ class RestaurantPhotoPageVC: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        0
+        selectedIndex
     }
     
     
