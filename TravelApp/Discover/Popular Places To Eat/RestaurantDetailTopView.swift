@@ -6,25 +6,26 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RestaurantDetailTopView: View {
     
-    let restaurant: Restaurant
+    let detail: RestaurantDetail?
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Image(restaurant.imageName)
+            
+            KFImage(URL(string: detail?.thumbnail ?? ""))
                 .resizable()
                 .scaledToFill()
-                .frame(height: 300)
-                .clipped()
+                .frame(width: 1, height: 350)
             
             LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black]), startPoint: .center, endPoint: .bottom)
             
             HStack {
                 
                 VStack(alignment: .leading) {
-                    Text(restaurant.name)
+                    Text(detail?.name ?? "")
                         .foregroundColor(.white)
                         .font(.title2.bold())
                     HStack {
@@ -52,6 +53,9 @@ struct RestaurantDetailTopView: View {
 
 struct RestaurantDetailTopView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantDetailTopView(restaurant: popularRestaurant.first!)
+        NavigationView {
+//            RestaurantDetailView(restaurant: popularRestaurant.first!)
+        }
+        
     }
 }

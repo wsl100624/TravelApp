@@ -6,31 +6,18 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RestaurantDetailView: View {
     
-    let restaurant: Restaurant
+    @ObservedObject var vm = RestaurantDetailViewModel()
     
     var body: some View {
+        
         ScrollView {
-            RestaurantDetailTopView(restaurant: restaurant)
             
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Location & Description")
-                    .font(.title3.bold())
-                Text("Tokyo, Japan")
-                
-                HStack {
-                    ForEach(0..<5, id: \.self) { num in
-                        Image(systemName: "dollarsign.circle.fill")
-                            .foregroundColor(.orange)
-                    }
-                }
-                
-                Text("Usually when you want to write a very long description, you want tot make sure that it spans at least a few lines, When I'm testing I like to see at least 5 lines of text so that things are auto sized correctly. One more line of text just to be safe.")
-                    .padding(.top, 8)
-                    .font(.callout)
-            }.padding()
+            RestaurantDetailTopView(detail: vm.details)
+            RestaurantDetailInfoView(detail: vm.details)
             
             HStack {
                 Text("Popular Dishes")
@@ -40,21 +27,8 @@ struct RestaurantDetailView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(0..<5, id: \.self) { num in
-                        VStack(alignment: .leading) {
-                            Image("image8")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(height: 80)
-                                .cornerRadius(5)
-                                .shadow(radius: 3)
-                                .padding(.vertical, 5)
-                            Text("Japanese Tapas")
-                                .font(.callout.bold())
-                            Text("9 Photos")
-                                .foregroundColor(.secondary)
-                                .font(.caption.bold())
-                        }
+                    ForEach(vm.details?.popularDishes ?? [], id: \.self) { dish in
+                        DishView(dish: dish)
                     }
                 }.padding(.horizontal)
             }
@@ -63,10 +37,36 @@ struct RestaurantDetailView: View {
     }
 }
 
+struct RestaurantDetailInfoView: View {
+    
+    let detail: RestaurantDetail?
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Location & Description")
+                .font(.title3.bold())
+            Text("\(detail?.city ?? ""), \(detail?.country ?? "")")
+            
+            HStack {
+                ForEach(0..<5, id: \.self) { num in
+                    Image(systemName: "dollarsign.circle.fill")
+                        .foregroundColor(.orange)
+                }
+            }
+            
+            Text(detail?.description ?? "")
+                .padding(.top, 8)
+                .font(.callout)
+        }.padding()
+    }
+}
+
+
+
 struct RestaurantDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RestaurantDetailView(restaurant: popularRestaurant.last!)
+//            RestaurantDetailView(restaurant: popularRestaurant.last!)
         }
         
     }

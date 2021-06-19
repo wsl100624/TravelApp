@@ -28,8 +28,7 @@ struct PopularPlacesToEatView: View {
                     ForEach(items, id: \.self) { item in
                         NavigationLink(
                             destination:
-                            
-                                RestaurantDetailView(restaurant: item),
+                                RestaurantDetailView(),
                             label: {
                                 RestaurantTile(item: item)
                                     .foregroundColor(Color(.label))
