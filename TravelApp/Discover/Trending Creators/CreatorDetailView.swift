@@ -28,7 +28,7 @@ struct CreatorDetailView: View {
                     .scaledToFit()
                     .frame(width: 60)
                     .clipShape(Circle())
-                    .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 10, x: 0.0, y: 3)
+                    .niceShadow()
                     .padding(.top)
                 
                 Text("\(vm.creatorDetail?.firstName ?? "") \(vm.creatorDetail?.lastName ?? "")")

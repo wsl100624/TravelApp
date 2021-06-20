@@ -30,6 +30,7 @@ struct CreatorPostList: View {
                     VStack(alignment: .leading) {
                         Text(post.title)
                             .font(.caption.bold())
+                            .foregroundColor(Color(.label))
                         Text("\(post.views) views")
                             .font(.caption2)
                             .foregroundColor(.secondary)
@@ -40,7 +41,6 @@ struct CreatorPostList: View {
                     ForEach(post.hashtags, id: \.self) { tag in
                         Text("#\(tag)")
                             .font(.footnote.bold())
-                            .padding(.horizontal, 12)
                             .padding(.vertical, 4)
                             .foregroundColor(.blue)
                             .background(Color(.secondarySystemFill))
@@ -51,7 +51,7 @@ struct CreatorPostList: View {
              
             }
 //                    .frame(height: 200)
-            .background(Color.white)
+            .background(Color(.systemBackground))
             .cornerRadius(12)
             .niceShadow()
         }
