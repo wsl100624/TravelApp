@@ -13,4 +13,5 @@ extension Color {
     static let loadingBackground = Color(.init(white: 0, alpha: 0.7))
     
     static let defaultBackground = Color("defaultBackground")
+    static let blueGradient = Color("blueGradient")
 }

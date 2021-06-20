@@ -16,7 +16,7 @@ struct DiscoverView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color("blueGradient"), Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))]), startPoint: .top, endPoint: .center)
+                LinearGradient(gradient: Gradient(colors: [Color.blueGradient, Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))]), startPoint: .top, endPoint: .center)
                     .ignoresSafeArea()
                 
                 Color.defaultBackground.offset(y: 400)
