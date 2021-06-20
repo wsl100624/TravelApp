@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension Color {
+    
     static let discoverBackground = Color(.init(white: 0.96, alpha: 1))
     static let loadingBackground = Color(.init(white: 0, alpha: 0.7))
+    
+    static let defaultBackground = Color("defaultBackground")
 }

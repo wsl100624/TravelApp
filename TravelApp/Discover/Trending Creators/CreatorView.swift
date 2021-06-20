@@ -18,7 +18,7 @@ struct CreatorView: View {
                 .scaledToFill()
                 .frame(width: 80, height: 80)
                 .cornerRadius(40)
-                .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 5, x: 0.0, y: 3)
+                .niceShadow()
             
             Text(item.name)
                 .font(.caption.bold())

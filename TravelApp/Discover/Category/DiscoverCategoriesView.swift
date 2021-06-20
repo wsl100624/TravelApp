@@ -35,7 +35,7 @@ struct DiscoverCategoriesView: View {
                                     .font(.title)
                                     .foregroundColor(Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)))
                                     .frame(width: 80, height: 80)
-                                    .background(Color.white)
+                                    .background(Color.defaultBackground)
                                     .cornerRadius(40)
                                 Text(item.name)
                                     .foregroundColor(Color.white)

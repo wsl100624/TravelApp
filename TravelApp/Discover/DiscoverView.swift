@@ -16,10 +16,10 @@ struct DiscoverView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))]), startPoint: .top, endPoint: .center)
+                LinearGradient(gradient: Gradient(colors: [Color("blueGradient"), Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))]), startPoint: .top, endPoint: .center)
                     .ignoresSafeArea()
                 
-                Color.discoverBackground.offset(y: 400)
+                Color.defaultBackground.offset(y: 400)
                 
                 ScrollView {
                     
@@ -42,7 +42,7 @@ struct DiscoverView: View {
                         PopularPlacesToEatView()
                         TrendingCreatorsView()
                     }
-                    .background(Color(.init(white: 0.95, alpha: 1)))
+                    .background(Color.defaultBackground)
                     .cornerRadius(18)
                     .padding(.top, 32)
                 }
@@ -55,5 +55,8 @@ struct DiscoverView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DiscoverView()
+            .colorScheme(.dark)
+//        DiscoverView()
+//            .colorScheme(.light)
     }
 }

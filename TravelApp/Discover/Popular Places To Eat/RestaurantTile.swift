@@ -15,7 +15,7 @@ struct RestaurantTile: View {
             Image(item.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 100, height: 80)
+                .frame(width: 80, height: 80)
                 .background(Color.gray)
                 .cornerRadius(5)
                 .padding(.horizontal, 8)
@@ -33,7 +33,7 @@ struct RestaurantTile: View {
                     Image(systemName: "star.fill")
                     Text("4.7 • Sushi • $$")
                 }
-                Text(item.name)
+                Text("Tokyo, Japan")
             }.font(.system(.callout).bold())
             
             Spacer()

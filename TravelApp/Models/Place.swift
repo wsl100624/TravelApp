@@ -41,7 +41,8 @@ let popularDestinations = [
 ]
 
 let popularRestaurant = [
-    Restaurant(name: "Japan's Finest Tapas", imageName: "creator9")
+    Restaurant(name: "Japan's Finest Tapas", imageName: "creator9"),
+    Restaurant(name: "Taco Bell", imageName: "creator4")
 ]
 
 struct Creator: Hashable {

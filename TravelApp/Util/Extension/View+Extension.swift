@@ -20,18 +20,22 @@ extension View {
 
 
 struct TileModifer: ViewModifier {
+    
     func body(content: Content) -> some View {
         content
-            .background(Color.white)
+            .background(Color(.systemBackground))
             .cornerRadius(5)
-            .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 5, x: 0.0, y: 2)
+            .niceShadow()
     }
 }
 
 
 struct ShadowModifer: ViewModifier {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     func body(content: Content) -> some View {
         content
-            .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 5, x: 0.0, y: 3)
+            .shadow(color: .init(.sRGB, white: 0.8, opacity: colorScheme == .light ? 1 : 0), radius: 5, x: 0.0, y: 2)
     }
 }
