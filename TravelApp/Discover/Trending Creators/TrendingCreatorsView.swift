@@ -10,15 +10,15 @@ import SwiftUI
 struct TrendingCreatorsView: View {
     
     var items = [
-        Creator(name: "Amy Tang", imageName: creatorImages.randomElement()!),
-        Creator(name: "Harvey Buddy", imageName: creatorImages.randomElement()!),
-        Creator(name: "Hilde Wade", imageName: creatorImages.randomElement()!),
-        Creator(name: "Mark Russell", imageName: creatorImages.randomElement()!),
-        Creator(name: "Will Wang", imageName: creatorImages.randomElement()!),
-        Creator(name: "Jason C", imageName: creatorImages.randomElement()!),
-        Creator(name: "Milky Williams", imageName: creatorImages.randomElement()!),
-        Creator(name: "Tom Witten", imageName: creatorImages.randomElement()!),
-        Creator(name: "Rob Bentley", imageName: creatorImages.randomElement()!)
+        Creator(name: "Amy Tang", imageName: creatorImages.randomElement()!, id: 0),
+        Creator(name: "Harvey Buddy", imageName: creatorImages.randomElement()!, id: 1),
+        Creator(name: "Hilde Wade", imageName: creatorImages.randomElement()!, id: 2),
+        Creator(name: "Mark Russell", imageName: creatorImages.randomElement()!, id: 3),
+        Creator(name: "Will Wang", imageName: creatorImages.randomElement()!, id: 4),
+        Creator(name: "Jason C", imageName: creatorImages.randomElement()!, id: 5),
+        Creator(name: "Milky Williams", imageName: creatorImages.randomElement()!, id: 6),
+        Creator(name: "Tom Witten", imageName: creatorImages.randomElement()!, id: 7),
+        Creator(name: "Rob Bentley", imageName: creatorImages.randomElement()!, id: 8)
     ]
     
     var body: some View {
@@ -35,22 +35,18 @@ struct TrendingCreatorsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 12) {
-                    ForEach(items, id: \.self) { item in
-                        VStack {
-                            Image(item.imageName)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 80, height: 80)
-                                .cornerRadius(40)
-                                .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 5, x: 0.0, y: 3)
-                            
-                            Text(item.name)
-                                .font(.system(.caption))
-                        }
-                        .frame(width: 80)
-                        .padding(.bottom)
+                    ForEach(items, id: \.self) { creator in
+                        NavigationLink(
+                            destination: NavigationLazyView(
+                                CreatorDetailView(creator: creator)
+                            ),
+                            label: {
+                                CreatorView(item: creator)
+                            })
                     }
-                }.padding(.horizontal)
+                }
+                .padding(.bottom)
+                .padding(.horizontal)
             }
         }
     }
@@ -59,6 +55,9 @@ struct TrendingCreatorsView: View {
 
 struct TrendingCreatorsView_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingCreatorsView()
+        NavigationView {
+            TrendingCreatorsView()
+        }
+        
     }
 }

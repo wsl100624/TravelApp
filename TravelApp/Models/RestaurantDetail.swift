@@ -32,11 +32,6 @@ struct ReviewUser: Decodable, Hashable {
     let username, firstName, lastName, profileImage: String
 }
 
-struct Post: Decodable, Hashable {
-    let title, imageUrl, views: String
-    let hashtags: [String]
-}
-
 class RestaurantDetailViewModel: ObservableObject {
     
     @Published var isLoading = true

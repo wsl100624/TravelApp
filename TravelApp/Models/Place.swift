@@ -46,6 +46,7 @@ let popularRestaurant = [
 
 struct Creator: Hashable {
     var name, imageName: String
+    var id: Int
 }
 
 let discoverIcons = [
