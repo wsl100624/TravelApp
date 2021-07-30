@@ -24,7 +24,7 @@ struct PopularDestinationDetailView: View {
     
     init(name: String) {
         self.name = name
-        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: 0.0, longitude: 0.0), span: .init(latitudeDelta: 0.07, longitudeDelta: 0.07)))
+        self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: attractions.first!.lat, longitude: attractions.first!.long), span: .init(latitudeDelta: 0.07, longitudeDelta: 0.07)))
         self.detailViewModel = .init(name: name)
     }
     
@@ -77,10 +77,10 @@ struct PopularDestinationDetailView: View {
             .padding(.horizontal)
             
             Map(coordinateRegion: $region, annotationItems: isShowingAttractions ? attractions : []) { attraction in
-//                MapMarker(coordinate: .init(latitude: attraction.lat, longitude: attraction.long), tint: Color(UIColor.systemBlue))
-                MapAnnotation(coordinate: .init(latitude: attraction.lat, longitude: attraction.long)) {
-                    CustomMapAnnotation(attraction: attraction)
-                }
+                MapMarker(coordinate: .init(latitude: attraction.lat, longitude: attraction.long), tint: Color(UIColor.systemBlue))
+//                MapAnnotation(coordinate: .init(latitude: attraction.lat, longitude: attraction.long)) {
+//                    CustomMapAnnotation(attraction: attraction)
+//                }
             }
             .frame(height: 300)
             

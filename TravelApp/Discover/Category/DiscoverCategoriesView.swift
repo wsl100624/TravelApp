@@ -10,10 +10,10 @@ import SwiftUI
 struct DiscoverCategoriesView: View {
     
     var items = [
-        Place(name: "Art", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Sports", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Food", thumbnail: discoverIcons.randomElement()!),
-        Place(name: "Hello", thumbnail: discoverIcons.randomElement()!),
+        Place(name: "Art", thumbnail: "paintpalette"),
+        Place(name: "Sports", thumbnail: "sportscourt.fill"),
+        Place(name: "Food", thumbnail: "binoculars.fill"),
+        Place(name: "Game", thumbnail: "gamecontroller.fill"),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
         Place(name: "Live Events", thumbnail: discoverIcons.randomElement()!),
